@@ -1,0 +1,13 @@
+Source: mrtgdf
+Section: admin
+Priority: optional
+Maintainer: Richard Kettlewell <rjk@greenend.org.uk>
+Standards-Version: 3.9.2
+Homepage: https://www.greenend.org.uk/rjk/
+
+Package: mrtgdf
+Architecture: any
+Depends: ${misc:Depends},${shlibs:Depends}
+Description: Disk usage helper for MRTG
+ A caching disk usage monitor that outputs in the format required by
+ MRTG.
