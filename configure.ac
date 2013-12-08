@@ -15,7 +15,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 # 02110-1301, USA.
 AC_PREREQ([2.61])
-AC_INIT([mrtgdf], [0.0], [rjk@greenend.org.uk])
+AC_INIT([mrtgdf], [0.1], [rjk@greenend.org.uk])
 AC_CONFIG_AUX_DIR([config.aux])
 AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE([foreign])

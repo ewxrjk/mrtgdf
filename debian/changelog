@@ -1,3 +1,10 @@
+mrtgdf (0.1) unstable; urgency=low
+
+  * Add --help and --version options.
+  * Report space free to unprivileged user rather than just anyone.
+
+ -- Richard Kettlewell <rjk@greenend.org.uk>  Sun, 08 Dec 2013 11:43:46 +0000
+
 mrtgdf (0.0) unstable; urgency=low
 
   * Initial release
