@@ -3,6 +3,7 @@
 INSTALL
 Makefile
 Makefile.in
+_builds
 aclocal.m4
 autom4te.cache
 config.aux
@@ -17,5 +18,6 @@ debian/*.substvars
 debian/files
 debian/mrtgdf
 debian/substvars
+products
 src/mrtgdf
 stamp-h1

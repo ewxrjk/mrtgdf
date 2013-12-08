@@ -1,0 +1,104 @@
+#! /bin/bash
+#
+# This file is part of mrtgdf
+# Copyright (C) 2010-13 Richard Kettlewell
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+# 02110-1301, USA.
+
+set -e
+
+# s COMMAND...
+#
+# Echo a command then execute it.
+s() {
+  echo "$@" >&2
+  "$@"
+}
+
+# r HOST COMMAND...
+#
+# Echo a command then execute it remotely.
+r() {
+  local host=$1
+  shift
+  echo "$host:" "$@" >&2
+  case $host in
+  schroot:* )
+#    echo ">" schroot -c${host#schroot:} -- bash -c "$@" >&2
+    schroot -c${host#schroot:} -- bash -c "$@"
+    ;;
+  * )
+#    echo ">" ssh $host "$@" >&2
+    ssh $host "$@"
+    ;;
+  esac
+}
+
+# build HOST ARCH
+#
+# Create a .deb on HOST for architecture ARCH, then copy it back here
+# and add it to the list of build products.
+build() {
+  local host=$1
+  local arch=$2
+  local debs
+
+  for b in $binpkgs; do
+    debs="$debs ${b}_${version}_${arch}.deb"
+  done
+  echo
+  echo "Build on $host for $arch"
+  echo
+  r $host "mkdir -p _builds"
+  r $host "cd _builds && rm -rf ${source} ${archive} ${debs}"
+  r $host "cat > _builds/${archive}" < ${archive}
+  r $host "cd _builds && tar xfz ${archive}"
+  r $host "cd _builds/${source} && debian/rules build"
+  r $host "cd _builds/${source} && fakeroot debian/rules binary"
+  for deb in $debs; do
+    r $host "cat _builds/$deb" > products/$deb
+  done
+  echo
+  echo "Built $debs"
+  echo
+}
+
+rm -rf products
+mkdir products
+
+# Build the source archive
+s make distcheck
+cp README.md products/mrtgdf-README.md
+
+srcpkg=mrtgdf                   # source package name
+binpkgs="mrtgdf"                # binary packages
+version=$(make echo-version)    # get version number
+source=${srcpkg}-${version}     # source directory
+archive=${srcpkg}-${version}.tar.gz # tarball
+
+# Build .deb files
+s build araminta amd64          # wheezy
+s build schroot:wheezy32 i386   # wheezy
+
+mv "$archive" products/
+
+lintian -i -I products/*.deb
+
+# List built products
+echo
+echo Final build products:
+echo
+ls -l products/
