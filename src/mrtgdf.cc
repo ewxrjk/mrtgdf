@@ -33,6 +33,7 @@
 #include <unistd.h>
 #include <libgen.h>
 #include <cerrno>
+#include <getopt.h>
 
 static std::string cacheDir;
 
@@ -139,11 +140,49 @@ static void stash(const std::string &path, const struct statfs &sf) {
     throw std::runtime_error("closing " + cp + ": " + strerror(errno));
 }
 
+static const struct option options[] = {
+  { "help", no_argument, 0, 'h' },
+  { "version", no_argument, 0, 'V' },
+  { 0, 0, 0, 0 }
+};
+
+static void help(void) {
+  if(printf("Usage:\n"
+            "  mrtgdf [OPTIONS] [--] PATH\n"
+            "Options:\n"
+            "  -h, --help          Display usage message\n"
+            "  -V, --version       Display version string\n"
+            "Displays block and inode percentage used for filesystem at PATH,\n"
+            "or a cached value if it is not mounted.\n"
+            "\n") < 0
+     || fflush(stdout) < 0)
+    throw std::runtime_error("writing to stdout: " + std::string(strerror(errno)));
+}
+
+static void version(void) {
+  if(puts(VERSION) < 0
+     || fflush(stdout) < 0)
+    throw std::runtime_error("writing to stdout: " + std::string(strerror(errno)));
+}
+
 int main(int argc, char **argv) {
   try {
-    if(argc != 2)
-      throw std::runtime_error("usage: mrtgdf PATH");
-    const std::string path = argv[1];
+    int n;
+    while((n = getopt_long(argc, argv, "hV", options, 0)) >= 0) {
+      switch(n) {
+      case 'h':
+        help();
+        return 0;
+      case 'V':
+        version();
+        return 0;
+      default:
+        return 1;
+      }
+    }
+    if(argc - optind != 1)
+      throw std::runtime_error("usage: mrtgdf [OPTIONS] [--] PATH");
+    const std::string path = argv[optind];
     cacheDir = std::string(getenv("HOME")) + "/.mrtgdf";
     struct statfs sf;
     struct utsname u;

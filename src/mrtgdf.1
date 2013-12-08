@@ -2,9 +2,16 @@
 .SH NAME
 mrtgdf - report and cache disk usage
 .SH SYNOPSIS
-\fBmrtgdf\fR \fIPATH\fR
+\fBmrtgdf\fR [\fIOPTIONS\fR] [\fB--\fR] \fIPATH\fR
 .SH DESCRIPTION
 \fBmrtgdf\fR reports the disk usage of a system in a format intended
 for use by MRTG.
 If the filesystem is not currently mounted then a cached value is
 reported.
+.SH OPTIONS
+.TP
+.B --help
+Display a usage message.
+.TP
+.B --version
+Display a version string.
