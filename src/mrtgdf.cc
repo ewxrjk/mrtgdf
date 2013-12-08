@@ -160,7 +160,7 @@ int main(int argc, char **argv) {
       }
     }
     if(printf("%d\n%d\n-\n%s\n",
-              percent((sf.f_blocks - sf.f_bfree), sf.f_blocks),
+              percent((sf.f_blocks - sf.f_bavail), sf.f_blocks),
               percent((sf.f_files - sf.f_ffree), sf.f_files),
               u.nodename) < 0
        || fflush(stdout) < 0)
