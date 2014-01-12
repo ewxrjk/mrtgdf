@@ -11,3 +11,6 @@ Depends: ${misc:Depends},${shlibs:Depends}
 Description: Disk usage helper for MRTG
  A caching disk usage monitor that outputs in the format required by
  MRTG.
+ .
+ This is intended to substitute for SNMP-based disk space polling;
+ snmpd seems to have trouble with stably identifying filesystems.
