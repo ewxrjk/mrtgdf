@@ -21,3 +21,4 @@ debian/substvars
 products
 src/mrtgdf
 stamp-h1
+.deps
