@@ -39,7 +39,7 @@ AH_BOTTOM([#ifdef __GNUC__
 
 if test "x$GXX" = xyes; then
   werror="-Werror"
-  CXX="$CXX -std=gnu++03 -Wall -W -Wno-pointer-arith -Wwrite-strings -Wmissing-declarations -Wno-switch"
+  CXX="$CXX -std=c++03 -Wall -W -Wno-pointer-arith -Wwrite-strings -Wmissing-declarations -Wno-switch"
 fi
 
 AC_ARG_ENABLE([werror],[AS_HELP_STRING([--disable-werror],[don't use -Werror])],
