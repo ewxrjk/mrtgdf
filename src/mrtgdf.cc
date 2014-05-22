@@ -1,4 +1,4 @@
-// Copyright © 2013 Richard Kettlewell
+// Copyright © 2013, 2014 Richard Kettlewell
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,7 +26,15 @@
 #include <cstring>
 #include <cmath>
 #include <cstdlib>
-#include <sys/vfs.h>
+#if HAVE_SYS_VFS_H
+# include <sys/vfs.h>
+#endif
+#if HAVE_SYS_PARAM_H
+# include <sys/param.h>
+#endif
+#if HAVE_SYS_MOUNT_H
+# include <sys/mount.h>
+#endif
 #include <sys/stat.h>
 #include <sys/utsname.h>
 #include <fcntl.h>

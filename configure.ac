@@ -1,4 +1,4 @@
-# Copyright © 2013 Richard Kettlewell
+# Copyright © 2013, 2014 Richard Kettlewell
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -27,6 +27,8 @@ AC_PROG_RANLIB
 AC_SET_MAKE
 
 ## Dependencies
+
+AC_CHECK_HEADERS([sys/vfs.h sys/param.h sys/mount.h])
 
 ## Definitions
 
