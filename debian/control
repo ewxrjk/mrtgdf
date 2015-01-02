@@ -3,7 +3,7 @@ Section: admin
 Priority: optional
 Maintainer: Richard Kettlewell <rjk@greenend.org.uk>
 Standards-Version: 3.9.2
-Homepage: https://www.greenend.org.uk/rjk/
+Homepage: https://github.com/ewxrjk/mrtgdf
 
 Package: mrtgdf
 Architecture: any
