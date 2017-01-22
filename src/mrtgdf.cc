@@ -1,4 +1,4 @@
-// Copyright © 2013, 2014 Richard Kettlewell
+// Copyright © 2013, 2014, 2017 Richard Kettlewell
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -94,8 +94,7 @@ static int percent(T count, T max) {
 static std::string encode(const std::string &path) {
   std::stringstream ss;
   ss << std::uppercase << std::hex << std::setfill('0');
-  for(size_t n = 0; n < path.size(); ++n) {
-    char c = path[n];
+  for(auto c: path) {
     if(c == '/' || c <= ' ' || c > 0x7E)
       ss << '%' << std::setw(2) << (int)(unsigned char)c;
     else

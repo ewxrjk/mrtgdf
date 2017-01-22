@@ -1,3 +1,9 @@
+mrtgdf (2) stable; urgency=medium
+
+  * Build fixes, C++11 update
+
+ -- Richard Kettlewell <rjk@terraraq.org.uk>  Sun, 22 Jan 2017 17:21:00 +0000
+
 mrtgdf (0.1) unstable; urgency=low
 
   * Add --help and --version options.

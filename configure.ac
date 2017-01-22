@@ -15,7 +15,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 # 02110-1301, USA.
 AC_PREREQ([2.61])
-AC_INIT([mrtgdf], [0.1], [rjk@greenend.org.uk])
+AC_INIT([mrtgdf], [2], [rjk@greenend.org.uk])
 AC_CONFIG_AUX_DIR([config.aux])
 AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE([foreign])
@@ -41,7 +41,7 @@ AH_BOTTOM([#ifdef __GNUC__
 
 if test "x$GXX" = xyes; then
   werror="-Werror"
-  CXX="$CXX -std=c++03 -Wall -W -Wno-pointer-arith -Wwrite-strings -Wmissing-declarations -Wno-switch"
+  CXX="$CXX -std=c++11 -Wall -W -Wno-pointer-arith -Wwrite-strings -Wmissing-declarations -Wno-switch"
 fi
 
 AC_ARG_ENABLE([werror],[AS_HELP_STRING([--disable-werror],[don't use -Werror])],
