@@ -1,6 +1,8 @@
 mrtgdf
 ======
 
+[![Build Status](https://travis-ci.org/ewxrjk/mrtgdf.svg?branch=master)](https://travis-ci.org/ewxrjk/mrtgdf)
+
 A caching disk usage monitor that outputs in the format required by
 MRTG.  SNMP doesn't seem to be able to provide a stable identity for
 removable disks, hence this program.
