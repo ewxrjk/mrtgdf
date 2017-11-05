@@ -19,7 +19,7 @@ AC_INIT([mrtgdf], [2], [rjk@greenend.org.uk])
 AC_CONFIG_AUX_DIR([config.aux])
 AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE([foreign])
-m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES])
+m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 AC_CONFIG_SRCDIR([src/mrtgdf.cc])
 AM_CONFIG_HEADER([config.h])
 AC_PROG_CXX
