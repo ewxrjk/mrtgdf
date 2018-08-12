@@ -80,6 +80,8 @@ rm -rf products
 mkdir products
 
 # Build the source archive
+[ -e configure ] || s autoreconf -si
+[ -e Makefile ] || s ./configure
 s make distcheck
 cp README.md products/mrtgdf-README.md
 
@@ -90,8 +92,8 @@ source=${srcpkg}-${version}     # source directory
 archive=${srcpkg}-${version}.tar.gz # tarball
 
 # Build .deb files
-s build araminta amd64          # jessie
-s build schroot:jessie32 i386   # jessie
+s build araminta amd64          # stretch
+s build schroot:stretch32 i386  # stretch
 
 mv "$archive" products/
 
