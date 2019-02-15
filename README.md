@@ -7,6 +7,8 @@ A caching disk usage monitor that outputs in the format required by
 MRTG.  SNMP doesn't seem to be able to provide a stable identity for
 removable disks, hence this program.
 
+⚠ I don't use this program any more, do not expect updates. ⚠
+
 Installation
 ------------
 
